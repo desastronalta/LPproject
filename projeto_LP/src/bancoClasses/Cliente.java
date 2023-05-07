@@ -40,10 +40,9 @@ public class Cliente {
 	public void setNumBanco(int numBanc) {
 		this.numBanco = numBanc;
 	}
-	public void criarCliente(String nome, String contaType, int saldo, int credito) {
+	public void criarCliente(String nome, String contaType, int saldo) {
 		setNome(nome);
 		setContaType(contaType);
 		setSaldo(saldo);
-		setCredito(credito);
 	}
 }
