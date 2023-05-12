@@ -3,7 +3,7 @@ import java.util.Random;
 public class conta {
 	private double saldo;
 	private double credito;
-	private double numBanco;
+	private int numBanco;
 	private double saldoCredito;
 	
 	//getters
@@ -13,7 +13,7 @@ public class conta {
 	public double getCredito() {
 		return credito;
 	}
-	public double getNumBanco() {
+	public int getNumBanco() {
 		return numBanco;
 	}
 	public double getSaldoCredito() {
@@ -27,7 +27,7 @@ public class conta {
 	public void setCredito(double credito) {
 		this.credito = credito;
 	}
-	public void setNumBanco(double numBanco) {
+	public void setNumBanco(int numBanco) {
 		this.numBanco = numBanco;
 	}
 	public void setSaldoCredito(double saldoCredito) {

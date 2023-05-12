@@ -15,12 +15,11 @@ public class Banco {
 	
 	public void addClient(Cliente cliente) {
 		clientes.add(cliente);
-		cliente.setNumBanco(numerarCliente()-1);
 	}
-	public boolean searchCliente(int numBanco) {
+	public boolean searchCliente(String cpf) {
 		int i;
 		for(i = 0; i<clientes.size()-1; i++) {
-			if(clientes.get(i).getNumBanco() == numBanco) {
+			if(clientes.get(i).getCpf().equals(cpf)) {
 				return true;
 			}
 		}
