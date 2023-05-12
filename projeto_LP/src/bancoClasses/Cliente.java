@@ -1,9 +1,12 @@
 package bancoClasses;
 
+import java.util.Random;
+
 public class Cliente {
 	private String nome;
 	private String contaType;
 	private String cpf;
+	private int numBanco;
 	
 	
 	
@@ -17,6 +20,9 @@ public class Cliente {
 	public String getContaType() {
 		return contaType;
 	}
+	public int getNumBanco() {
+		return numBanco;
+	}
 	
 	//setter's methods
 	public void setNome(String nome) {
@@ -28,10 +34,14 @@ public class Cliente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+	public void setNumBanco(int numBanco) {
+		this.numBanco = numBanco;
+	}
 	public void criarCliente(String nome, String contaType, String cpf ) {
+		Random rand = new Random();
 		setNome(nome);
 		setContaType(contaType);
 		setCpf(cpf);
+		setNumBanco(rand.nextInt(500));
 	}
 }
