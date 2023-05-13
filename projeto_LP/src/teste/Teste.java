@@ -50,6 +50,8 @@ public class Teste {
     public static void pagarComCredito(String cpf, int numConta, Banco banco) throws excecoes {
         Conta conta = banco.getConta(numConta, cpf);
         Cliente cliente = banco.getClient(cpf);
+
+
         Metodos metodos = new Metodos();
         Scanner input = new Scanner(System.in);
 
