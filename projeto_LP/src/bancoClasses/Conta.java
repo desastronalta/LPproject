@@ -1,10 +1,10 @@
 package bancoClasses;
 
 
-public class Conta {
+public class Conta{
 	private double saldo;
 	private double credito;
-	private double saldoCredito;
+	private double saldoCredito = credito;
 	
 	//getters
 	public double getSaldo() {
@@ -29,9 +29,8 @@ public class Conta {
 		this.saldoCredito = saldoCredito;
 	}
 	
-	public void cadastrarConta(double saldo, double saldoCredito) {
+	public void cadastrarConta(double saldo, Cliente cliente) {
 		setSaldo(saldo);
-		setSaldoCredito(saldoCredito);
-		
+		setCredito(TypeConta.valueOf(cliente.getContaType()).credit());
 	}
 }
