@@ -4,7 +4,7 @@ package bancoClasses;
 public class Conta {
 	private double saldo;
 	private double credito;
-	private double saldoCredito;
+	private double saldoCredito = credito;
 	
 	//getters
 	public double getSaldo() {
@@ -29,9 +29,7 @@ public class Conta {
 		this.saldoCredito = saldoCredito;
 	}
 	
-	public void cadastrarConta(double saldo, double saldoCredito) {
-		setSaldo(saldo);
-		setSaldoCredito(saldoCredito);
-		
+	public void cadastrarConta(double saldo) {
+		setSaldo(saldo);	
 	}
 }

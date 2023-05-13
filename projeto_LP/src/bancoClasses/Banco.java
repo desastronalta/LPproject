@@ -17,6 +17,15 @@ public class Banco {
 		contas.add(conta);
 	}
 	
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+
+	public ArrayList<Conta> getContas() {
+		return contas;
+	}
+
 	public void excluirConta(String nome, String cpf, int numBanco) {
 		for(int i = 0; i < clientes.size();i++) {
 			if(clientes.get(i).getNome().equals(nome)) {

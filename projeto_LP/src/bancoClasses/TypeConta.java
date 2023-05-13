@@ -11,5 +11,5 @@ public enum TypeConta {
     TypeConta(double credit){
         this.credit = credit;
     }
-    private double credit (){return credit;}
+    public double credit(){return credit;}
 }
