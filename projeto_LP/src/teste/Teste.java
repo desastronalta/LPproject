@@ -13,26 +13,7 @@ public class Teste {
         Metodos metodos = new Metodos();
         Scanner input = new Scanner(System.in);
 
-        try {
-            metodos.pagar(cliente, conta);
-        } catch (excecoes e) {
-            System.out.println(e.getMessage());
-
-            System.out.println("Tentar novamente? S/N");
-            char c = input.next().charAt(0);
-            while ((c != 'N' && c != 'n') && (c != 'S' && c != 's')) {
-                System.out.println(e);
-                System.out.println("Tentar novamente? S/N");
-                c = input.next().charAt(0);
-            }
-
-            if (c == 'n' || c == 'N') {
-                System.out.println("Sistema fechado");
-            } else {
-                pagarComCredito(cpf, numConta, banco);
-            }
-
-        }
+        metodos.pagar(conta, 100, 2);
 
     }
 
@@ -52,7 +33,6 @@ public class Teste {
 		
 	sc.close();
 	}
-<<<<<<< Upstream, based on forMerge/main
 	public static void mostrarCliente(Banco banco, int i) {
 		
 		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
@@ -60,6 +40,4 @@ public class Teste {
 		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
 	}
 
-=======
->>>>>>> fc3b3f7 *
 }
