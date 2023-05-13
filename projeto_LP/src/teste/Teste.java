@@ -47,11 +47,12 @@ public class Teste {
 		banco.addClient(cliente1, conta1);
 			
 		for(int i= 0; i < banco.getClientes().size();i++) {
-			mostrarCliente(banco,i);
+			Metodos.mostrarCliente(banco,i);
 		}
 		
 	sc.close();
 	}
+<<<<<<< Upstream, based on forMerge/main
 	public static void mostrarCliente(Banco banco, int i) {
 		
 		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
@@ -59,4 +60,6 @@ public class Teste {
 		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
 	}
 
+=======
+>>>>>>> fc3b3f7 *
 }
