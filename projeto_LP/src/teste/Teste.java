@@ -9,21 +9,13 @@ public class Teste {
 		Cliente cliente1 = new Cliente();
 		Banco banco = new Banco();
 		Conta conta1 = new Conta();
-		Cliente clinte2 = new Cliente();
+		Cliente cliente2 = new Cliente();
 		Conta conta2 = new Conta();
-		for(int i= 0; i < banco.getClientes().size();i++) {
-			System.out.println("escreva seu name");
-			String name = sc.next();
-			System.out.println("insira seu cpf");
-			String cpf = sc.next();
-			System.out.println("insira seu tipo de conta");
-			String typeConta = sc.next();
-			System.out.println();
-			double saldo = sc.nextDouble();
-			TypeConta.light.credit();
-			banco.getClientes().get(i).criarCliente(name, typeConta, cpf);
-			banco.getContas().get(i).cadastrarConta(saldo);
-		}
+		entrarDados(cliente1, conta1);
+		entrarDados(cliente2, conta2);
+		banco.addClient(cliente1, conta1);
+		banco.addClient(cliente2, conta2);
+			
 		for(int i= 0; i < banco.getClientes().size();i++) {
 			mostrarCliente(banco,i);
 		}
@@ -33,5 +25,18 @@ public class Teste {
 	public static void mostrarCliente(Banco banco, int i) {
 		System.out.println(banco.getClientes().get(i).getContaType());
 		System.out.println(banco.getClientes().get(i).getCpf());
+	}
+	public static void entrarDados(Cliente cliente, Conta conta) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("escreva seu name");
+		String name = sc.next();
+		System.out.println("insira seu cpf");
+		String cpf = sc.next();
+		System.out.println("insira seu tipo de conta");
+		String typeConta = sc.next();
+		System.out.println("saldo da conta");
+		double saldo = sc.nextDouble();
+		cliente.criarCliente(name, typeConta, cpf);
+		conta.cadastrarConta(saldo, cliente);
 	}
 }

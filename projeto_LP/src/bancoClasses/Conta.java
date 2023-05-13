@@ -1,7 +1,7 @@
 package bancoClasses;
 
 
-public class Conta {
+public class Conta extends Cliente{
 	private double saldo;
 	private double credito;
 	private double saldoCredito = credito;
@@ -29,7 +29,8 @@ public class Conta {
 		this.saldoCredito = saldoCredito;
 	}
 	
-	public void cadastrarConta(double saldo) {
-		setSaldo(saldo);	
+	public void cadastrarConta(double saldo, Cliente cliente) {
+		setSaldo(saldo);
+		setCredito(TypeConta.valueOf(cliente.getContaType()).credit());
 	}
 }
