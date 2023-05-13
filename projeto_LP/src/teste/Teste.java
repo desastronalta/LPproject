@@ -23,6 +23,7 @@ public class Teste {
 	sc.close();
 	}
 	public static void mostrarCliente(Banco banco, int i) {
+		
 		System.out.println(banco.getClientes().get(i).getContaType());
 		System.out.println(banco.getClientes().get(i).getCpf());
 	}
