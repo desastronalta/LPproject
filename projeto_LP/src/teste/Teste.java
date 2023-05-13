@@ -12,6 +12,7 @@ public class Teste {
 		Cliente cliente2 = new Cliente();
 		Conta conta2 = new Conta();
 		entrarDados(cliente1, conta1);
+		System.out.print("\n\n");
 		entrarDados(cliente2, conta2);
 		banco.addClient(cliente1, conta1);
 		banco.addClient(cliente2, conta2);
@@ -24,8 +25,9 @@ public class Teste {
 	}
 	public static void mostrarCliente(Banco banco, int i) {
 		
-		System.out.println(banco.getClientes().get(i).getContaType());
-		System.out.println(banco.getClientes().get(i).getCpf());
+		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
+		System.out.print(banco.getClientes().get(i).getCpf()+"\n");
+		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
 	}
 	public static void entrarDados(Cliente cliente, Conta conta) {
 		Scanner sc = new Scanner(System.in);

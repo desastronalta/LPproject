@@ -1,7 +1,7 @@
 package bancoClasses;
 
 
-public class Conta extends Cliente{
+public class Conta{
 	private double saldo;
 	private double credito;
 	private double saldoCredito = credito;
