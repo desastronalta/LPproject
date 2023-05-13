@@ -1,9 +1,14 @@
 package teste;
 
+import bancoClasses.*;
+
 public class Teste {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Cliente cliente1 = new Cliente();
+		Banco banco = new Banco();
+		Conta conta = new Conta();
+		
 
 	}
 
