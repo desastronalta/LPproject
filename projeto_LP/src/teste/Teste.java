@@ -13,7 +13,7 @@ public class Teste {
         Metodos metodos = new Metodos();
         Scanner input = new Scanner(System.in);
 
-        metodos.pagar(conta, 100, 2);
+        metodos.pagar(conta, 100, 1);
 
     }
 
@@ -38,6 +38,7 @@ public class Teste {
 		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
 		System.out.print(banco.getClientes().get(i).getCpf()+"\n");
 		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
+		System.out.print(banco.getContas().get(i).getSaldo()+"\n");
 	}
 
 }
