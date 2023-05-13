@@ -82,4 +82,16 @@ public class Banco {
         }
         return false;
     }
+	public void excluirConta1(String nome, String cpf, int numBanco) {
+		for(int i = 0; i < clientes.size();i++) {
+			if(clientes.get(i).getNome().equals(nome)) {
+				if(clientes.get(i).getCpf().equals(cpf)) {
+					if(clientes.get(i).getNumBanco() == numBanco){
+						clientes.remove(i);
+						contas.remove(i);
+					}
+				}
+			}
+		}
+	}
 }
