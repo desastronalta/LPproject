@@ -17,7 +17,7 @@ public class Cliente {
 	public String getNome() {
 		return nome;
 	}
-	public String getContaType() {
+	public  getContaType() {
 		return contaType;
 	}
 	public int getNumBanco() {
