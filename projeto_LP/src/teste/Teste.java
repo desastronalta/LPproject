@@ -22,13 +22,18 @@ public class Teste {
 		System.out.println("nome:");
 		String nome = sc.next();
 		String cpf = sc.next();
+		boolean existe = true;
 		try {
 			metodo.verificarCliente(banco, nome, cpf, numBanco);
 		} catch (Excecoes e) {
 			System.out.print(e.getMessage()+"\n");
+			existe = false;
 		}
 		finally{
-			
+			if(existe) {
+				System.out.println("logado");
+				
+			}else System.out.println("tente novamente ou cadastre-se");
 		}
 	sc.close();
 	}
