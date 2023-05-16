@@ -38,10 +38,10 @@ public class Cliente {
 		this.numBanco = numBanco;
 	}
 	public void criarCliente(String nome, String contaType, String cpf ) {
-		Random rand = new Random();
+		
 		setNome(nome);
 		setContaType(contaType);
 		setCpf(cpf);
-		setNumBanco(rand.nextInt(500));
+		setNumBanco(Metodos.criarNumBanco());
 	}
 }

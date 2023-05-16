@@ -1,13 +1,12 @@
 package bancoClasses;
 
-public class excecoes extends Exception {
+public class Excecoes extends Exception {
 
-    String message;
+    private String message;
 
-    public excecoes(String message) {
+    public Excecoes(String message) {
         this.message = message;
-    }
-
+    }    
     @Override
     public String getMessage() {
         return message;

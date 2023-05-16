@@ -1,5 +1,6 @@
 package bancoClasses;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Metodos {
@@ -15,21 +16,21 @@ public class Metodos {
 		}
 		return false;
 	}
-	public boolean validarNome(Cliente cliente, int numBanco) {
+	public boolean validarNumBanco(Cliente cliente, int numBanco) {
 		if(cliente.getNumBanco() == numBanco) {
 			return true;
 		}
 		return false;
 	}
 	public void pagar(Conta conta, double valorCompra, int opcao){
-		double valorAtual;
 		if(opcao == 1) {
-			valorAtual = conta.getSaldo()-valorCompra;
-			conta.setSaldo(valorAtual);
+			conta.setSaldo(conta.getSaldo()-valorCompra);
 		}else if(opcao == 2) {
-			valorAtual = conta.getSaldoCredito()-valorCompra; 
+			conta.setCredito(conta.getCredito()-valorCompra);
 		}else System.out.println("numero incorreto digite novamente");
 	}
+	
+	
 	public static void entrarDados(Cliente cliente, Conta conta) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("escreva seu name");
@@ -41,12 +42,53 @@ public class Metodos {
 		System.out.println("saldo da conta");
 		double saldo = sc.nextDouble();
 		cliente.criarCliente(name, typeConta, cpf);
-		conta.cadastrarConta(saldo, typeConta);
+		conta.cadastrarConta(saldo,  cliente);
+		System.out.println("seu numero bancario é: " + cliente.getNumBanco());
 	}
+	
+	
 	public static void mostrarCliente(Banco banco, int i) {
-		
-		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
-		System.out.print(banco.getClientes().get(i).getCpf()+"\n");
-		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
+		System.out.print("nome :"+banco.getClientes().get(i).getNome()+"\n");
+		System.out.print("Rank da conta :"+banco.getClientes().get(i).getContaType()+"\n");
+		System.out.print("CPF :"+banco.getClientes().get(i).getCpf()+"\n");
+		System.out.print("Credito :"+banco.getContas().get(i).getSaldoCredito()+"\n");
+		System.out.print("N.Bancario :"+banco.getClientes().get(i).getNumBanco()+"\n");
+	}
+	
+	
+	public boolean searchCliente(String nome, String cpf, int numBanco, Banco banco) {
+		boolean achou = true;
+		for (int i = 0; i < banco.getClientes().size(); i++) {
+            if ( banco.getClientes().get(i).getNome().equals(nome)) {
+                if ( banco.getClientes().get(i).getCpf().equals(cpf)) {
+                    if ( banco.getClientes().get(i).getNumBanco() == numBanco) {
+                       achou = false;
+                       break;
+                    }
+                }
+            } 
+		}
+		return achou;
+	}
+	
+	
+	public static int criarNumBanco() {
+		Random rand = new Random();
+		int numBanco = rand.nextInt(100, 999);
+		return numBanco;
+	}
+	
+	
+	public void entraSaldo(double valor, Conta conta){
+		conta.setSaldo(conta.getSaldo() + valor);
+	}
+	
+	
+	public void verificarCliente(Banco banco, String cpf, String nome, int numBanco) throws Excecoes {
+		Metodos metodo = new Metodos();
+		if(!metodo.searchCliente(nome, cpf, numBanco, banco)) {
+			throw new Excecoes("Os dados nao sao compativeis, tente novamente, ou caso nao tenha cadastro,"
+					+ " por favor selecione 'cadastrar cliente.'");
+		}
 	}
 }

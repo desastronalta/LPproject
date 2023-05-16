@@ -1,23 +1,11 @@
 package teste;
 
 import bancoClasses.*;
-
 import java.util.Scanner;
 
 public class Teste {
-   public static void pagarComCredito(String cpf, int numConta, Banco banco) throws excecoes {
-        Conta conta = banco.getConta(numConta, cpf);
-        Cliente cliente = banco.getClient(cpf);
-
-
-        Metodos metodos = new Metodos();
-        Scanner input = new Scanner(System.in);
-
-        metodos.pagar(conta, 100, 1);
-
-    }
-
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
+		Metodos metodo = new Metodos();
 		Scanner sc = new Scanner(System.in);
 		Cliente cliente1 = new Cliente();
 		Banco banco = new Banco();
@@ -25,20 +13,24 @@ public class Teste {
 		Cliente cliente2 = new Cliente();
 		Conta conta2 = new Conta();
 		Metodos.entrarDados(cliente1, conta1);
+		Metodos.entrarDados(cliente2, conta2);
 		banco.addClient(cliente1, conta1);
-			
-		for(int i= 0; i < banco.getClientes().size();i++) {
-			Metodos.mostrarCliente(banco,i);
+		banco.addClient(cliente2, conta2);
+		System.out.println("Para acessar a conta informe os dados a seguir");
+		System.out.println("Numero bancario");
+		int numBanco = sc.nextInt();
+		System.out.println("nome:");
+		String nome = sc.next();
+		String cpf = sc.next();
+		try {
+			metodo.verificarCliente(banco, nome, cpf, numBanco);
+		} catch (Excecoes e) {
+			System.out.print(e.getMessage()+"\n");
 		}
-		
+		finally{
+			
+		}
 	sc.close();
-	}
-	public static void mostrarCliente(Banco banco, int i) {
-		
-		System.out.print(banco.getClientes().get(i).getContaType()+"\n");
-		System.out.print(banco.getClientes().get(i).getCpf()+"\n");
-		System.out.print(banco.getContas().get(i).getSaldoCredito()+"\n");
-		System.out.print(banco.getContas().get(i).getSaldo()+"\n");
 	}
 
 }
