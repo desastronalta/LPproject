@@ -22,12 +22,34 @@ public class Metodos {
 		}
 		return false;
 	}
-	public void pagar(Conta conta, double valorCompra, int opcao){
-		if(opcao == 1) {
-			conta.setSaldo(conta.getSaldo()-valorCompra);
-		}else if(opcao == 2) {
-			conta.setCredito(conta.getCredito()-valorCompra);
-		}else System.out.println("numero incorreto digite novamente");
+	public void pagar(Banco banco, double valorCompra, int posicao) throws Excecoes{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Escolha 1 para pagar no debito ou 2 para pagar com credito.");
+		int escolha = sc.nextInt();
+		try {
+			Interface.verificaEscolha(escolha);
+		}catch(Excecoes e) {
+			System.out.println(e.getMessage());
+			this.pagar(banco, valorCompra, posicao);
+		}finally {
+			if(escolha == 1) {
+				double saldo = banco.getContas().get(posicao).getSaldo();
+				 
+				 if(saldo < valorCompra) {
+					 throw new Excecoes("voce nao possui saldo o suficiente para efetuar a compra. ");
+				 }else {
+					 banco.getContas().get(posicao).setSaldo(saldo - valorCompra);
+				 }
+			}
+			if(escolha == 2) {
+				double saldo = banco.getContas().get(posicao).getSaldoCredito();
+				if(saldo < valorCompra) {
+					throw new Excecoes("voce nao possui creditos o suficiente para efetuar a compra. ");
+				}else {
+					banco.getContas().get(posicao).setSaldoCredito(saldo - valorCompra);
+				}
+			}
+		}
 	}
 	
 	
@@ -56,13 +78,14 @@ public class Metodos {
 	}
 	
 	
-	public boolean searchCliente(String nome, String cpf, int numBanco, Banco banco) {
+	public boolean searchCliente(String nome, String cpf, int numBanco, Banco banco,int posicao) {
 		boolean achou = true;
 		for (int i = 0; i < banco.getClientes().size(); i++) {
             if ( banco.getClientes().get(i).getNome().equals(nome)) {
                 if ( banco.getClientes().get(i).getCpf().equals(cpf)) {
                     if ( banco.getClientes().get(i).getNumBanco() == numBanco) {
                        achou = false;
+                       posicao = i;
                        break;
                     }
                 }
@@ -79,16 +102,35 @@ public class Metodos {
 	}
 	
 	
-	public void entraSaldo(double valor, Conta conta){
-		conta.setSaldo(conta.getSaldo() + valor);
+	public void entraSaldo(Banco banco, int i){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("insira o valor que sera depositado na conta");
+		double valor = sc.nextDouble();
+		double saldo = banco.getContas().get(i).getSaldo();
+		banco.getContas().get(i).setSaldo(saldo + valor);
 	}
 	
 	
-	public void verificarCliente(Banco banco, String cpf, String nome, int numBanco) throws Excecoes {
+	public void verificarCliente(Banco banco, String cpf, String nome, int numBanco, int posicao) throws Excecoes {
 		Metodos metodo = new Metodos();
-		if(!metodo.searchCliente(nome, cpf, numBanco, banco)) {
+		if(!metodo.searchCliente(nome, cpf, numBanco, banco, posicao)) {
 			throw new Excecoes("Os dados nao sao compativeis, tente novamente, ou caso nao tenha cadastro,"
 					+ " por favor selecione 'cadastrar cliente.'");
 		}
 	}
+
+	@SuppressWarnings("finally")
+	public boolean validaConta(Banco banco, String cpf, String nome, int numBanco, int posicao) {
+		boolean existe = true;
+		try {
+			verificarCliente(banco, nome, cpf, numBanco, posicao);
+		} catch (Excecoes e) {
+			System.out.print(e.getMessage()+"\n");
+			existe = false;
+		}
+		finally{
+			return existe;
+		}
+	}
+	
 }
