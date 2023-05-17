@@ -10,7 +10,7 @@ public class Interface {
 		int choose;
 		System.out.println("Bem vindo(a)!");
         System.out.println("=====================================================");
-        System.out.println(" INICIO:\n       Opção 1: Login | Opção 2: Cadastrar     ");
+        System.out.println(" INICIO:\n       Opcao 1: Login | Opcao 2: Cadastrar     ");
         System.out.println("=====================================================");
         choose = sc.nextInt();
         try {
@@ -61,7 +61,7 @@ public class Interface {
 		}
 		finally{
 			if(existe) {
-				System.out.println("logado");
+				System.out.print("logado\n\n");
 				logar(banco, posicao);
 			}else {
 				System.out.println("tente novamente ou cadastre-se");
@@ -86,10 +86,12 @@ public class Interface {
 	public void logar(Banco banco, int posicao) throws Excecoes {
 		Metodos metod = new Metodos();
 		Scanner sc = new Scanner(System.in);
+		System.out.print("\n\n");
 		System.out.println("aperte 0 para sair.");
 		System.out.println("aperte 1 para efetuar um pagamento.");
 		System.out.println("aperte 2 para ver as inforacoes da conta.");
 		System.out.println("aperte 3 para colocar dinheiro da conta.");
+		System.out.print("\n\n");
 		int escolha = sc.nextInt();
 		switch (escolha){
 			case 0:
@@ -106,9 +108,10 @@ public class Interface {
 				}
 			case 2:
 				Metodos.mostrarCliente(banco, posicao);
-			
+				this.logar(banco, posicao);
 			case 3:
 				metod.entraSaldo(banco, posicao);
+				this.logar(banco, posicao);
 			default:
 				System.out.println("o numero digitado nao e uma opcao tente novamente.");
 				this.logar(banco, posicao);

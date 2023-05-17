@@ -32,26 +32,29 @@ public class Metodos {
 	
 	public static void entrarDados(Cliente cliente, Conta conta) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("escreva seu name");
+		System.out.println("Digite seu nome");
 		String name = sc.next();
-		System.out.println("insira seu cpf");
+		System.out.println("Insira seu cpf");
 		String cpf = sc.next();
-		System.out.println("insira seu tipo de conta");
+		System.out.println("Insira seu tipo de conta");
 		String typeConta = sc.next();
-		System.out.println("saldo da conta");
+		System.out.println("Saldo da conta");
 		double saldo = sc.nextDouble();
 		cliente.criarCliente(name, typeConta, cpf);
 		conta.cadastrarConta(saldo,  cliente);
-		System.out.println("seu numero bancario é: " + cliente.getNumBanco());
+		System.out.println("Seu numero bancario é: " + cliente.getNumBanco());
 	}
 	
 	
 	public static void mostrarCliente(Banco banco, int i) {
-		System.out.print("nome :"+banco.getClientes().get(i).getNome()+"\n");
+		System.out.print("\n\n====================================================\n");
+		System.out.print("Nome :"+banco.getClientes().get(i).getNome()+"\n");
 		System.out.print("Rank da conta :"+banco.getClientes().get(i).getContaType()+"\n");
 		System.out.print("CPF :"+banco.getClientes().get(i).getCpf()+"\n");
 		System.out.print("Credito :"+banco.getContas().get(i).getSaldoCredito()+"\n");
+		System.out.print("Credito :"+banco.getContas().get(i).getSaldo()+"\n");
 		System.out.print("N.Bancario :"+banco.getClientes().get(i).getNumBanco()+"\n");
+		System.out.print("======================================================\n\n");
 	}
 	
 	
@@ -59,11 +62,11 @@ public class Metodos {
 		int posicao = -1;
 		for (int i = 0; i < banco.getClientes().size(); i++) {
             if ( banco.getClientes().get(i).getNome().equals(nome)) {
-            	System.out.println("nome encontrado");
+            	
                 if ( banco.getClientes().get(i).getCpf().compareTo(cpf) == 0) {
-                	System.out.println("cpf encontrado");
+                
                     if ( banco.getClientes().get(i).getNumBanco() == numBanco) {
-                    	System.out.println("nun banco encontrado");
+                    
                        posicao = i;
                        break;
                     }
@@ -93,7 +96,7 @@ public class Metodos {
 	public void verificarCliente(int posicao) throws Excecoes {
 
 		if(posicao == -1) {
-			throw new Excecoes("Os dados nao sao compativeis, tente novamente, ou caso nao tenha cadastro,"
+			throw new Excecoes("Os dados nao sao compativeis, tente novamente, caso nao tenha cadastro,"
 					+ " por favor selecione 'cadastrar cliente.'");
 		}
 	}
