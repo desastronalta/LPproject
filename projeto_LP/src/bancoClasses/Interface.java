@@ -3,15 +3,16 @@ package bancoClasses;
 import java.util.Scanner;
 public class Interface {
 	
-	private int choose;
+
 	
 	public void start(Banco banco) throws Excecoes {
 		Scanner sc = new Scanner(System.in);
+		int choose;
 		System.out.println("Bem vindo(a)!");
         System.out.println("=====================================================");
         System.out.println(" INICIO:\n       Opção 1: Login | Opção 2: Cadastrar     ");
         System.out.println("=====================================================");
-        this.choose = sc.nextInt();
+        choose = sc.nextInt();
         try {
         	verificaEscolha(choose);
         }catch(Excecoes e) {
@@ -20,14 +21,14 @@ public class Interface {
         }finally {
         	if(choose == 1) {
         		login(banco);
-        	}else {
+        	}else if(choose == 2) {
         		cadastro(banco);
         	}
         }
 	}
 	
 	public static void verificaEscolha(int choose) throws Excecoes {
-		if(choose != 1 || choose != 2) {
+		if(choose != 1 && choose != 2) {
 			throw new Excecoes("Numero invalido. Escolha entre as opcoes 1 e 2.");
 		}
 	}
@@ -69,7 +70,7 @@ public class Interface {
 		}
 	}
 	
-	public void cadastro(Banco banco) {
+	public void cadastro(Banco banco) throws Excecoes {
 		Cliente novoCliente = new Cliente();
 		Conta novaConta = new Conta();
 		System.out.println("=====================================================");
@@ -80,6 +81,7 @@ public class Interface {
 		Metodos.entrarDados(novoCliente, novaConta);
 		banco.addClient(novoCliente, novaConta);
 		System.out.println("Cadastro realizado com sucesso!");
+		this.start(banco);
 	}
 	public void logar(Banco banco, int posicao) throws Excecoes {
 		Metodos metod = new Metodos();
