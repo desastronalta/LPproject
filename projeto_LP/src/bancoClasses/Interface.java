@@ -52,9 +52,9 @@ public class Interface {
         System.out.println("=====================================================");
         String nome = sc.next();
         boolean existe = true;
-        int posicao = 0;
+        int posicao = metod.searchCliente(nome, cpf, numBanc, banco);
 		try {
-			metod.verificarCliente(banco, nome, cpf, numBanc, posicao);
+			metod.verificarCliente(posicao);
 		} catch (Excecoes e) {
 			System.out.print(e.getMessage()+"\n");
 			existe = false;

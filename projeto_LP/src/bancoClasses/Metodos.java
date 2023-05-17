@@ -4,34 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Metodos {
-	public boolean validarCpf(Cliente cliente, String cpf) {
-		if(cliente.getCpf().equals(cpf)) {
-			return true;
-		}
-		return false;
-	}
-	public boolean validarNome(Cliente cliente, String name) {
-		if(cliente.getNome().equalsIgnoreCase(name)) {
-			return true;
-		}
-		return false;
-	}
-	public boolean validarNumBanco(Cliente cliente, int numBanco) {
-		if(cliente.getNumBanco() == numBanco) {
-			return true;
-		}
-		return false;
-	}
 	public void pagar(Banco banco, double valorCompra, int posicao) throws Excecoes{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Escolha 1 para pagar no debito ou 2 para pagar com credito.");
 		int escolha = sc.nextInt();
-		try {
-			Interface.verificaEscolha(escolha);
-		}catch(Excecoes e) {
-			System.out.println(e.getMessage());
-			this.pagar(banco, valorCompra, posicao);
-		}finally {
 			if(escolha == 1) {
 				double saldo = banco.getContas().get(posicao).getSaldo();
 				 
@@ -46,10 +22,11 @@ public class Metodos {
 				if(saldo < valorCompra) {
 					throw new Excecoes("voce nao possui creditos o suficiente para efetuar a compra. ");
 				}else {
-					banco.getContas().get(posicao).setSaldoCredito(saldo - valorCompra);
+					banco.getContas().get(posicao).setSaldoCredito(saldo - valorCompra);			
 				}
+			}else {
+				this.pagar(banco, valorCompra, posicao);
 			}
-		}
 	}
 	
 	
@@ -78,20 +55,22 @@ public class Metodos {
 	}
 	
 	
-	public boolean searchCliente(String nome, String cpf, int numBanco, Banco banco,int posicao) {
-		boolean achou = true;
+	public int searchCliente(String nome, String cpf, int numBanco, Banco banco) {
+		int posicao = -1;
 		for (int i = 0; i < banco.getClientes().size(); i++) {
             if ( banco.getClientes().get(i).getNome().equals(nome)) {
-                if ( banco.getClientes().get(i).getCpf().equals(cpf)) {
+            	System.out.println("nome encontrado");
+                if ( banco.getClientes().get(i).getCpf().compareTo(cpf) == 0) {
+                	System.out.println("cpf encontrado");
                     if ( banco.getClientes().get(i).getNumBanco() == numBanco) {
-                       achou = false;
+                    	System.out.println("nun banco encontrado");
                        posicao = i;
                        break;
                     }
                 }
-            } 
+            }
 		}
-		return achou;
+		return posicao;
 	}
 	
 	
@@ -111,19 +90,19 @@ public class Metodos {
 	}
 	
 	
-	public void verificarCliente(Banco banco, String cpf, String nome, int numBanco, int posicao) throws Excecoes {
-		Metodos metodo = new Metodos();
-		if(!metodo.searchCliente(nome, cpf, numBanco, banco, posicao)) {
+	public void verificarCliente(int posicao) throws Excecoes {
+
+		if(posicao == -1) {
 			throw new Excecoes("Os dados nao sao compativeis, tente novamente, ou caso nao tenha cadastro,"
 					+ " por favor selecione 'cadastrar cliente.'");
 		}
 	}
 
 	@SuppressWarnings("finally")
-	public boolean validaConta(Banco banco, String cpf, String nome, int numBanco, int posicao) {
+	public boolean validaConta(int posicao) {
 		boolean existe = true;
 		try {
-			verificarCliente(banco, nome, cpf, numBanco, posicao);
+			verificarCliente(posicao);
 		} catch (Excecoes e) {
 			System.out.print(e.getMessage()+"\n");
 			existe = false;
