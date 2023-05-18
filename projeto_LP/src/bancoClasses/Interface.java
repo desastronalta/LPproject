@@ -70,7 +70,7 @@ public class Interface {
 		}
 	}
 	
-	public void cadastro(Banco banco) throws Excecoes {
+	public void cadastro(Banco banco) throws InputMismatchException {
 		Cliente novoCliente = new Cliente();
 		Conta novaConta = new Conta();
 		System.out.println("=====================================================");
@@ -78,10 +78,20 @@ public class Interface {
         		+ "        Insira os dados requisitados abaixo:         \n"
         		+ "!!!Lembre-se de guardar o número fornecido pelo Banco!!!");
         System.out.println("=====================================================");
+		try{
 			Metodos.entrarDados(novoCliente, novaConta);
+		}catch(InputMismatchException e) {
+			System.err.println("Os valores digitados estao invalidos por favor refaça");
+			this.cadastro(banco);
+		}
 		banco.addClient(novoCliente, novaConta);
 		System.out.println("Cadastro realizado com sucesso!");
-		this.start(banco);
+		try {
+			this.start(banco);
+		} catch (Excecoes e) {
+			
+			e.getMessage();
+		}
 	}
 	public void logar(Banco banco, int posicao) throws Excecoes {
 		Metodos metod = new Metodos();

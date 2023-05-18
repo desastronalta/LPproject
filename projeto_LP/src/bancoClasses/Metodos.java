@@ -14,8 +14,10 @@ public class Metodos {
 				 
 				 if(saldo < valorCompra) {
 					 throw new Excecoes("voce nao possui saldo o suficiente para efetuar a compra. ");
-				 }else {
+				 }
+				 else {
 					 banco.getContas().get(posicao).setSaldo(saldo - valorCompra);
+					 
 				 }
 			}
 			if(escolha == 2) {
@@ -23,21 +25,19 @@ public class Metodos {
 				if(saldo < valorCompra) {
 					throw new Excecoes("voce nao possui creditos o suficiente para efetuar a compra. ");
 				}else {
-					banco.getContas().get(posicao).setSaldoCredito(saldo - valorCompra);			
+					banco.getContas().get(posicao).setSaldoCredito(saldo - valorCompra);
+					
 				}
-			}else {
-				this.pagar(banco, valorCompra, posicao);
 			}
 	}
 	
 	
-	public static void entrarDados(Cliente cliente, Conta conta) {
+	public static void entrarDados(Cliente cliente, Conta conta) throws InputMismatchException  {
 			Scanner sc = new Scanner(System.in);
 			String name = null;
 			String cpf = null;
 			String typeConta = null;
 			boolean verificacao = false;
-			do{
 				try {
 					System.out.println("Digite seu nome");
 					name = sc.next();
@@ -47,11 +47,8 @@ public class Metodos {
 					typeConta = sc.next();
 					System.out.println("Saldo da conta");
 				}catch(InputMismatchException e) {
-					System.out.println("por favor insira apenas letras nao sera aceito caracteres");
-					sc.nextLine();
-					verificacao = true;
+					throw new InputMismatchException("Erro ao ler os dados. por favor digite novamente.");
 				}
-			}while(verificacao);
 			
 			double saldo = sc.nextDouble();
 			cliente.criarCliente(name, typeConta, cpf);
