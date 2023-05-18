@@ -1,5 +1,6 @@
 package bancoClasses;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Interface {
 	
@@ -64,7 +65,6 @@ public class Interface {
 				System.out.print("logado\n\n");
 				logar(banco, posicao);
 			}else {
-				System.out.println("tente novamente ou cadastre-se");
 				start(banco);
 			}
 		}
@@ -78,7 +78,7 @@ public class Interface {
         		+ "        Insira os dados requisitados abaixo:         \n"
         		+ "!!!Lembre-se de guardar o número fornecido pelo Banco!!!");
         System.out.println("=====================================================");
-		Metodos.entrarDados(novoCliente, novaConta);
+			Metodos.entrarDados(novoCliente, novaConta);
 		banco.addClient(novoCliente, novaConta);
 		System.out.println("Cadastro realizado com sucesso!");
 		this.start(banco);

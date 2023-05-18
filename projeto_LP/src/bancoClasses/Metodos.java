@@ -1,5 +1,6 @@
 package bancoClasses;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -31,18 +32,31 @@ public class Metodos {
 	
 	
 	public static void entrarDados(Cliente cliente, Conta conta) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Digite seu nome");
-		String name = sc.next();
-		System.out.println("Insira seu cpf");
-		String cpf = sc.next();
-		System.out.println("Insira seu tipo de conta");
-		String typeConta = sc.next();
-		System.out.println("Saldo da conta");
-		double saldo = sc.nextDouble();
-		cliente.criarCliente(name, typeConta, cpf);
-		conta.cadastrarConta(saldo,  cliente);
-		System.out.println("Seu numero bancario é: " + cliente.getNumBanco());
+			Scanner sc = new Scanner(System.in);
+			String name = null;
+			String cpf = null;
+			String typeConta = null;
+			boolean verificacao = false;
+			do{
+				try {
+					System.out.println("Digite seu nome");
+					name = sc.next();
+					System.out.println("Insira seu cpf");
+					cpf = sc.next();
+					System.out.println("Insira seu tipo de conta");
+					typeConta = sc.next();
+					System.out.println("Saldo da conta");
+				}catch(InputMismatchException e) {
+					System.out.println("por favor insira apenas letras nao sera aceito caracteres");
+					sc.nextLine();
+					verificacao = true;
+				}
+			}while(verificacao);
+			
+			double saldo = sc.nextDouble();
+			cliente.criarCliente(name, typeConta, cpf);
+			conta.cadastrarConta(saldo,  cliente);
+			System.out.println("Seu numero bancario é: " + cliente.getNumBanco());
 	}
 	
 	
@@ -52,7 +66,7 @@ public class Metodos {
 		System.out.print("Rank da conta :"+banco.getClientes().get(i).getContaType()+"\n");
 		System.out.print("CPF :"+banco.getClientes().get(i).getCpf()+"\n");
 		System.out.print("Credito :"+banco.getContas().get(i).getSaldoCredito()+"\n");
-		System.out.print("Credito :"+banco.getContas().get(i).getSaldo()+"\n");
+		System.out.print("Saldo :"+banco.getContas().get(i).getSaldo()+"\n");
 		System.out.print("N.Bancario :"+banco.getClientes().get(i).getNumBanco()+"\n");
 		System.out.print("======================================================\n\n");
 	}
@@ -96,7 +110,7 @@ public class Metodos {
 	public void verificarCliente(int posicao) throws Excecoes {
 
 		if(posicao == -1) {
-			throw new Excecoes("Os dados nao sao compativeis, tente novamente, caso nao tenha cadastro,"
+			throw new Excecoes("Os dados nao sao compativeis, tente novamente.\nCaso nao tenha cadastro,"
 					+ " por favor selecione 'cadastrar cliente.'");
 		}
 	}
